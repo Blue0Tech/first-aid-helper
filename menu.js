@@ -55,7 +55,8 @@ export default class Menu extends React.Component {
 						'shivering',
 						'spasms',
 						'spassing',
-						'blackout'
+						'blackout',
+						'fits'
 					]
 				}
 			],

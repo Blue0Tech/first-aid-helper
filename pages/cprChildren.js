@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
-import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
+import * as Linking from 'expo-linking';
 
 export default class CPRChildren extends React.Component {
 	constructor() {
@@ -9,6 +10,9 @@ export default class CPRChildren extends React.Component {
 		this.state = {
 			isSpeaking : false
 		}
+	}
+	callEmergency=()=>{
+		Linking.openURL('tel:+441213502160');
 	}
 	goBack=()=>{
 		this.props.navigation.navigate('CPR');
@@ -22,13 +26,12 @@ export default class CPRChildren extends React.Component {
 			this.setState({
 				isSpeaking : true
 			});
+		} else {
+			Speech.stop();
+			this.setState({
+				isSpeaking : false
+			});
 		}
-	}
-	stopSpeaking=()=>{
-		Speech.stop();
-		this.setState({
-			isSpeaking : false
-		});
 	}
 	render() {
 		const title = 'CPR for children';
@@ -58,8 +61,8 @@ Perform 30 chest compressions, try to do two every second. Do this by placing on
 					>
 						<Text style={styles.normalText}>Go Back</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={()=>{this.stopSpeaking()}}>
-						<Entypo name="circle-with-cross" size={32} color="white" />
+					<TouchableOpacity onPress={()=>{this.callEmergency()}}>
+						<Ionicons name="call" size={32} color="white" />
 					</TouchableOpacity>
 				</View>
 				<Text style={styles.title}>{title}</Text>
