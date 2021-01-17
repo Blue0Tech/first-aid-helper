@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier" : "com.pruthvi.first_aid",
+      "bundleIdentifier" : "com.pruthvi.firstAid",
       "buildNumber" : "1.0.0"
     },
     "android": {
@@ -26,7 +26,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package" : "com.pruthvi.first_aid",
+      "package" : "com.pruthvi.firstAid",
       "versionCode" : 1
     },
     "web": {
