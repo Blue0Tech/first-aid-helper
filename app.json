@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier" : "com.pruthvi.first-aid",
+      "bundleIdentifier" : "com.pruthvi.first_aid",
       "buildNumber" : "1.0.0"
     },
     "android": {
