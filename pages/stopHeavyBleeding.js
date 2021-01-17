@@ -12,7 +12,7 @@ export default class HeavyBleeding extends React.Component {
 		}
 	}
 	callEmergency=()=>{
-		Linking.openURL('tel:+441213502160');
+		Linking.openURL('tel:112');
 	}
 	goBack=()=>{
 		this.props.navigation.navigate('Menu');
