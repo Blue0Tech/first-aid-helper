@@ -12,7 +12,7 @@ export default class Seizures extends React.Component {
 		}
 	}
 	callEmergency=()=>{
-		Linking.openURL('tel:112');
+		Linking.openURL('tel:999');
 	}
 	goBack=()=>{
 		this.props.navigation.navigate('Menu');
