@@ -77,7 +77,7 @@ Perform 30 chest compressions, try to do two every second. Do this by placing on
 
 const styles = StyleSheet.create({
 	scrollViewStyle : {
-		marginTop : 30,
+		marginTop : 45,
 		marginBottom : 30
 	},
 	container : {

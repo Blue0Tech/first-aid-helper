@@ -76,7 +76,7 @@ Attempt to note the time the seizure started and finished.`;
 
 const styles = StyleSheet.create({
 	scrollViewStyle : {
-		marginTop : 30,
+		marginTop : 45,
 		marginBottom : 30
 	},
 	container : {

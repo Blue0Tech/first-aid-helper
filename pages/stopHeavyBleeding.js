@@ -69,7 +69,7 @@ Hold pressure directly on the wound. You can do this by making a tourniquet. To 
 
 const styles = StyleSheet.create({
 	scrollViewStyle : {
-		marginTop : 30,
+		marginTop : 45,
 		marginBottom : 30
 	},
 	container : {

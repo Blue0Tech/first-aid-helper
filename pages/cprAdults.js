@@ -78,7 +78,7 @@ Repeat the chest compressions until they are conscious or help arrives.`;
 
 const styles = StyleSheet.create({
 	scrollViewStyle : {
-		marginTop : 30,
+		marginTop : 45,
 		marginBottom : 30
 	},
 	container : {
