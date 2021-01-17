@@ -26,7 +26,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package" : "com.pruthvi.first-aid",
+      "package" : "com.pruthvi.first_aid",
       "versionCode" : 1
     },
     "web": {
