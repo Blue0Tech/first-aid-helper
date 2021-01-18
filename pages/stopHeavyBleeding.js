@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Modal } from 'react-native';
+import { WebView } from 'react-native-webview';
+import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import * as Linking from 'expo-linking';
 
@@ -8,7 +9,8 @@ export default class HeavyBleeding extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			isSpeaking : false
+			isSpeaking : false,
+			modalVisible : false
 		}
 	}
 	callEmergency=()=>{
@@ -33,6 +35,16 @@ export default class HeavyBleeding extends React.Component {
 			});
 		}
 	}
+	showVideo=()=>{
+		this.setState({
+			modalVisible : true
+		});
+	}
+	hideVideo=()=>{
+		this.setState({
+			modalVisible : false
+		});
+	}
 	render() {
 		const title = 'Stopping heavy bleeding';
 		const intro = 'This information only applies to heavy bleeding, when a lot of blood is leaving the wound or the wound is in a dangerous area.';
@@ -46,7 +58,7 @@ Hold pressure directly on the wound. You can do this by making a tourniquet. To 
 		return (
 			<ScrollView contentContainerStyle={styles.container} style={styles.scrollViewStyle} persistentScrollbar={true}>
 				<View style={styles.topBar}>
-					<TouchableOpacity onPress={()=>{this.speakContent(content)}}>
+					<TouchableOpacity onPress={()=>{this.speakContent(content)}} style={styles.icon}>
 						<MaterialIcons name="keyboard-voice" size={32} color="white" />
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -55,10 +67,22 @@ Hold pressure directly on the wound. You can do this by making a tourniquet. To 
 					>
 						<Text style={styles.normalText}>Go Back</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={()=>{this.callEmergency()}}>
-						<Ionicons name="call" size={32} color="white" /><Text style={styles.normalText}>Emergency</Text>
+					<TouchableOpacity onPress={()=>{this.callEmergency()}} style={styles.icon}>
+						<Ionicons name="call" size={32} color="white" />
+					</TouchableOpacity>
+					<TouchableOpacity onPress={()=>{this.showVideo()}} style={styles.icon}>
+						<Entypo name="video" size={32} color="white" />
 					</TouchableOpacity>
 				</View>
+				<Modal visible={this.state.modalVisible} transparent>
+						<WebView
+							style={{width:320,maxHeight:200, alignSelf:'center', marginTop : 45}}
+							source={{uri:'https://www.youtube.com/embed/NxO5LvgqZe0?rel=0&autoplay=0&showinfo=0&controls=0'}}
+						/>
+						<TouchableOpacity onPress={()=>{this.hideVideo()}} style={styles.closeVideoButton}>
+							<Text style={styles.closeVideoButtonText}>Close video</Text>
+						</TouchableOpacity>
+				</Modal>
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.introText}>{intro}</Text>
 				<Text style={styles.contentText}>{content}</Text>
@@ -114,5 +138,24 @@ const styles = StyleSheet.create({
 		justifyContent : 'center',
 		flexDirection : 'row',
 		marginBottom : 10
+	},
+	icon : {
+		margin : 20
+	},
+	closeVideoButton : {
+		alignSelf : 'center',
+		backgroundColor : 'black',
+		width : 120,
+		height : 120,
+		alignItems : 'center',
+		justifyContent : 'center',
+		marginBottom : 100
+	},
+	closeVideoButtonText : {
+		color : 'white',
+		borderWidth : 1,
+		borderColor : 'white',
+		fontSize : 24,
+		padding : 10
 	}
 });

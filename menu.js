@@ -56,7 +56,8 @@ export default class Menu extends React.Component {
 						'spasms',
 						'spassing',
 						'blackout',
-						'fits'
+						'fits',
+						'convulsions'
 					]
 				}
 			],
@@ -118,7 +119,7 @@ export default class Menu extends React.Component {
 				<FlatList
 					data={this.state.searchData}
 					renderItem={({item}) => 
-						<View key={item.id}>
+						<View key={item.id.toString()}>
 							<TouchableOpacity
 								style={styles.item}
 								onPress={()=>{this.itemPress(item.id)}}

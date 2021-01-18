@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Modal } from 'react-native';
+import { WebView } from 'react-native-webview';
+import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import * as Linking from 'expo-linking';
 
@@ -8,7 +9,9 @@ export default class CPRChildren extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			isSpeaking : false
+			isSpeaking : false,
+			modalVisible : false,
+			modal2Visible : false
 		}
 	}
 	callEmergency=()=>{
@@ -33,6 +36,26 @@ export default class CPRChildren extends React.Component {
 			});
 		}
 	}
+	showVideo=()=>{
+		this.setState({
+			modalVisible : true
+		});
+	}
+	hideVideo=()=>{
+		this.setState({
+			modalVisible : false
+		});
+	}
+	showVideo2=()=>{
+		this.setState({
+			modal2Visible : true
+		});
+	}
+	hideVideo2=()=>{
+		this.setState({
+			modal2Visible : false
+		});
+	}
 	render() {
 		const title = 'CPR for children';
 		const intro = 'For children, use CPR when they are not breathing properly and not responding.';
@@ -52,7 +75,7 @@ Perform 30 chest compressions, try to do two every second. Do this by placing on
 		return (
 			<ScrollView contentContainerStyle={styles.container} style={styles.scrollViewStyle} persistentScrollbar={true}>
 				<View style={styles.topBar}>
-					<TouchableOpacity onPress={()=>{this.speakContent(content)}}>
+					<TouchableOpacity onPress={()=>{this.speakContent(content)}} style={styles.icon}>
 						<MaterialIcons name="keyboard-voice" size={32} color="white" />
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -61,14 +84,36 @@ Perform 30 chest compressions, try to do two every second. Do this by placing on
 					>
 						<Text style={styles.normalText}>Go Back</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={()=>{this.callEmergency()}}>
+					<TouchableOpacity onPress={()=>{this.callEmergency()}} style={styles.icon}>
 						<Ionicons name="call" size={32} color="white" />
 					</TouchableOpacity>
+					<TouchableOpacity onPress={()=>{this.showVideo()}} style={styles.icon}>
+						<Entypo name="video" size={32} color="white" />
+					</TouchableOpacity>
+					<TouchableOpacity onPress={()=>{this.showVideo2()}} style={styles.icon}>
+						<Entypo name="video" size={32} color="white" />
+					</TouchableOpacity>
 				</View>
+				<Modal visible={this.state.modalVisible} transparent>
+					<WebView
+						style={{width:320,maxHeight:200, alignSelf:'center', marginTop : 45}}
+						source={{uri:'https://www.youtube.com/embed/0aV9NS0ogiM?rel=0&autoplay=0&showinfo=0&controls=0'}}
+					/>
+					<TouchableOpacity onPress={()=>{this.hideVideo()}} style={styles.closeVideoButton}>
+						<Text style={styles.closeVideoButtonText}>Close video</Text>
+					</TouchableOpacity>
+				</Modal>
+				<Modal visible={this.state.modal2Visible} transparent>
+					<WebView
+						style={{width:320,maxHeight:200, alignSelf:'center', marginTop : 45}}
+						source={{uri:'https://www.youtube.com/embed/avYRvVHAvfM?rel=0&autoplay=0&showinfo=0&controls=0'}}
+					/>
+					<TouchableOpacity onPress={()=>{this.hideVideo2()}} style={styles.closeVideoButton}>
+						<Text style={styles.closeVideoButtonText}>Close video</Text>
+					</TouchableOpacity>
+				</Modal>
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.introText}>{intro}</Text>
-				<Image style={styles.image} source={require('../media/chestCompressions.png')}/>
-				<Image style={styles.image} source={require('../media/rescueBreaths.png')}/>
 				<Text style={styles.contentText}>{content}</Text>
 			</ScrollView>
 		)
@@ -122,5 +167,24 @@ const styles = StyleSheet.create({
 		justifyContent : 'center',
 		flexDirection : 'row',
 		marginBottom : 10
+	},
+	icon : {
+		margin : 20
+	},
+	closeVideoButton : {
+		alignSelf : 'center',
+		backgroundColor : 'black',
+		width : 120,
+		height : 120,
+		alignItems : 'center',
+		justifyContent : 'center',
+		marginBottom : 100
+	},
+	closeVideoButtonText : {
+		color : 'white',
+		borderWidth : 1,
+		borderColor : 'white',
+		fontSize : 24,
+		padding : 10
 	}
 });
