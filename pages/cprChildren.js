@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Modal } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Modal, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
@@ -59,23 +59,23 @@ export default class CPRChildren extends React.Component {
 	render() {
 		const title = 'CPR for children';
 		const intro = 'For children, use CPR when they are not breathing properly and not responding.';
-		const content =
-`Check that the area is safe, and you won't be put in danger trying to help the other person. Ask if they are okay, or for infants, flick their foot.
-
-Call emergency services (999 in the UK, 911 in the US, 112 internationally) and ask for the ambulance or ask someone else to. Ask a bystander to look for a AED/defibrilator.
-
-Lay the person on their back carefully and kneel beside their chest. Open their mouth to check for any obstructions such as food or vomit, and remove it if it is loose.
-
-Check if they are breathing by placing your ear next to their mouth for no longer than 10 seconds. Changes in an infant's breathing is normal. Keep monitoring their breathing, and if they stop breathing, perform CPR.
-
-Perform 2 rescue breaths. To do this, make sure their mouth is clear, tilt their head back and lift their chin. pinch their nose shut if they are a child, place your mouth fully over theirs, and breath into their mouth. If they are an infant, place your mouth over their mouth and nose and blow for a second to make their chest rise, then do two rescue breaths. If they are still unresponsive, begin chest compressions.
-
-Perform 30 chest compressions, try to do two every second. Do this by placing one of your hands for a child or two of your fingers for an infant slightly below their nipples. Push hard and fast, as deep as half of your pinkie finger's length.`
-		const contentEnd = 'Repeat the chest compressions until they are conscious or help arrives.';
+		const content = [
+			`Make sure it is safe for you to approach the victim.`,
+			`Call for Help`,
+			`Ask if they are okay, or for infants, flick their foot. If they respond, help them into a comfortable position If not, move to next step.`,
+			`Call emergency services and ask for the ambulance or ask someone else to do that.`,
+			`Ask a helper to look for an AED/defibrilator.`,
+			`Lay the person on their back carefully and kneel beside their chest. Gently tilt their head back and lift their chin. Check for any obstructions in their mouth such as food or vomit, and remove it if it is loose.`,
+			`Check if they are breathing by placing your ear next to their mouth for no longer than 10 seconds. Changes in an infant's breathing are normal. Keep monitoring their breathing, and if they stop breathing, perform CPR. If they are not breathing properly, start CPR.`,
+			`Perform 30 chest compressions; try to do two every second. Do this by placing one of your hands for a child or two of your fingers for an infant slightly below their nipples. Push hard and fast, as deep as half of your pinkie finger's length.`,
+			`Perform 2 rescue breaths. To do this, make sure their mouth is clear, tilt their head back and lift their chin. Pinch their nose shut if they are a child, place your mouth fully over theirs, and breathe into their mouth. If they are an infant, place your mouth over their mouth and nose and blow for a second to make their chest rise, and then do two rescue breaths.`,
+			`Carry on doing chest compressions and rescue breaths until help arrives or the victim wakes up. If you can’t do rescue breaths, just do chest compressions.`
+		];
+		const contentFull = content.join('\n');
 		return (
 			<ScrollView contentContainerStyle={styles.container} style={styles.scrollViewStyle} persistentScrollbar={true}>
 				<View style={styles.topBar}>
-					<TouchableOpacity onPress={()=>{this.speakContent(content)}} style={styles.icon}>
+					<TouchableOpacity onPress={()=>{this.speakContent(contentFull)}} style={styles.icon}>
 						<MaterialIcons name="keyboard-voice" size={32} color="white" />
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -114,7 +114,23 @@ Perform 30 chest compressions, try to do two every second. Do this by placing on
 				</Modal>
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.introText}>{intro}</Text>
-				<Text style={styles.contentText}>{content}</Text>
+				<Text style={styles.contentText}>{content[0]}</Text>
+				<Text style={styles.contentText}>{content[1]}</Text>
+				<Image style={styles.image} source={require("../media/callHelp.png")}/>
+				<Text style={styles.contentText}>{content[2]}</Text>
+				<Image style={styles.image} source={require("../media/checkOkay.png")}/>
+				<Text style={styles.contentText}>{content[3]}</Text>
+				<Image style={styles.image} source={require("../media/callEmergency.png")}/>
+				<Text style={styles.contentText}>{content[4]}</Text>
+				<Text style={styles.contentText}>{content[5]}</Text>
+				<Image style={styles.image} source={require("../media/checkBreathing.png")}/>
+				<Text style={styles.contentText}>{content[6]}</Text>
+				<Text style={styles.contentText}>{content[7]}</Text>
+				<Image style={styles.image} source={require("../media/chestCompressions.png")}/>
+				<Text style={styles.contentText}>{content[8]}</Text>
+				<Image style={styles.image} source={require("../media/rescueBreathsChildren.png")}/>
+				<Text style={styles.contentText}>{content[9]}</Text>
+				<Image style={styles.image} source={require("../media/ambulanceArrive.png")}/>
 			</ScrollView>
 		)
 	}
@@ -158,7 +174,7 @@ const styles = StyleSheet.create({
 	image : {
 		width : Dimensions.get('window').width*0.9,
 		height : Dimensions.get('window').width*0.7,
-		resizeMode : 'center'
+		resizeMode : 'stretch'
 	},
 	topBar : {
 		width : '100%',
@@ -178,7 +194,7 @@ const styles = StyleSheet.create({
 		height : 120,
 		alignItems : 'center',
 		justifyContent : 'center',
-		marginBottom : 100
+		marginBottom : 30
 	},
 	closeVideoButtonText : {
 		color : 'white',

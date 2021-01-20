@@ -38,7 +38,7 @@ export default class CPR extends React.Component {
 
 const styles = StyleSheet.create({
 	scrollViewStyle : {
-		marginTop : 30,
+		marginTop : 50,
 		marginBottom : 30
 	},
 	container : {

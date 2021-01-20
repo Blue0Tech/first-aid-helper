@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Modal } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Modal, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
@@ -48,24 +48,23 @@ export default class CPRAdults extends React.Component {
 	render() {
 		const title = 'CPR for adults';
 		const intro = 'For adults, use CPR when they are not breathing, gasping occasionally or when they don\'t respond to questions or taps on the shoulder.';
-		const content =
-`Check that the area is safe, and you won't be put in danger trying to help the other person.
-
-Call emergency services (999 in the UK, 911 in the US, 112 internationally) and ask for the ambulance or ask someone else to. Ask a bystander to look for a AED/defibrilator.
-
-Lay the person on their back carefully and kneel beside their chest. Open their mouth to check for any obstructions such as food or vomit, and remove it if it is loose.
-
-Check if they are breathing by placing your ear next to their mouth for no longer than 10 seconds. If they or not breathing properly or are gasping, perform CPR.
-
-Perform 30 chest compressions, try to do two every second. Do this by placing one of your hands on top of the other and clasping them together. With the heel of your hand and with straight elbows, push hard and fast in the centre of the chest, slightly below the nipples. Try to push almost as deep as your pinkie finger's length, and let the chest rise fully between compressions.
-
-Perform 2 rescue breaths. To do this, make sure their mouth is clear, tilt their head back and lift their chin. pinch their nose shut, place your mouth fully over theirs, and blow to make their chest rise. If their chest does not rise with the first breath, retilt the head and try again. If again the chest doesn't rise, the person might be choking.
-
-Repeat the chest compressions until they are conscious or help arrives.`;
+		const content = [
+			`Make sure it is safe for you to approach the victim.`,
+			`Call for Help.`,
+			`Check if the person is responsive (talk, touch, gently shake).If they respond, help them into a comfortable position. If not, move to next step.`,
+			`Call emergency services (yourself or a helper) and ask for the ambulance.`,
+			`Ask a helper to look for an defibrilator/AED.`,
+			`Lay the person on their back carefully and kneel beside their chest. Gently tilt their head back, and lift their chin. Check for any obstructions in their mouth such as food or vomit, and remove it if it is loose.`,
+			`Check if they are breathing by placing your ear next to their mouth for no more than 10 seconds. If they are not breathing properly or are gasping, perform CPR.`,
+			`Perform 30 chest compressions; try to do two every second. Do this by placing one of your hands on top of the other and clasping them together, interlocking your fingers. With the heel of your hand and with straight arms, push hard and fast in the centre of the chest, slightly below the nipples. Try to push almost as deep as your pinkie finger's length, and let the chest rise fully between compressions without taking your hands off.`,
+			`Perform 2 rescue breaths. To do this, make sure their mouth is clear, tilt their head back and lift their chin. Pinch their nose shut, place your mouth fully over theirs, and blow for about a second to make their chest rise. If their chest does not rise with the first breath, tilt the head again and try again. If again the chest doesn't rise, the person might be choking.`,
+			`Repeat the chest compressions and rescue breaths until they are conscious or help arrives. If you cannot do rescue breaths, just do chest compressions.`
+		];
+		const contentFull = content.join('\n');
 		return (
 			<ScrollView contentContainerStyle={styles.container} style={styles.scrollViewStyle} persistentScrollbar={true}>
 				<View style={styles.topBar}>
-					<TouchableOpacity onPress={()=>{this.speakContent(content)}} style={styles.icon}>
+					<TouchableOpacity onPress={()=>{this.speakContent(contentFull)}} style={styles.icon}>
 						<MaterialIcons name="keyboard-voice" size={32} color="white" />
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -92,7 +91,23 @@ Repeat the chest compressions until they are conscious or help arrives.`;
 				</Modal>
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.introText}>{intro}</Text>
-				<Text style={styles.contentText}>{content}</Text>
+				<Text style={styles.contentText}>{content[0]}</Text>
+				<Text style={styles.contentText}>{content[1]}</Text>
+				<Image style={styles.image} source={require("../media/callHelp.png")}/>
+				<Text style={styles.contentText}>{content[2]}</Text>
+				<Image style={styles.image} source={require("../media/checkOkay.png")}/>
+				<Text style={styles.contentText}>{content[3]}</Text>
+				<Image style={styles.image} source={require("../media/callEmergency.png")}/>
+				<Text style={styles.contentText}>{content[4]}</Text>
+				<Text style={styles.contentText}>{content[5]}</Text>
+				<Image style={styles.image} source={require("../media/checkBreathing.png")}/>
+				<Text style={styles.contentText}>{content[6]}</Text>
+				<Text style={styles.contentText}>{content[7]}</Text>
+				<Image style={styles.image} source={require("../media/chestCompressions.png")}/>
+				<Text style={styles.contentText}>{content[8]}</Text>
+				<Image style={styles.image} source={require("../media/rescueBreaths.png")}/>
+				<Text style={styles.contentText}>{content[9]}</Text>
+				<Image style={styles.image} source={require("../media/ambulanceArrive.png")}/>
 			</ScrollView>
 		)
 	}
@@ -136,7 +151,7 @@ const styles = StyleSheet.create({
 	image : {
 		width : Dimensions.get('window').width*0.9,
 		height : Dimensions.get('window').width*0.7,
-		resizeMode : 'center'
+		resizeMode : 'stretch'
 	},
 	topBar : {
 		width : '100%',
@@ -156,7 +171,7 @@ const styles = StyleSheet.create({
 		height : 120,
 		alignItems : 'center',
 		justifyContent : 'center',
-		marginBottom : 100
+		marginBottom : 30
 	},
 	closeVideoButtonText : {
 		color : 'white',
